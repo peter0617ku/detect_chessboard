@@ -65,10 +65,9 @@ def read_chess(chess_img, chess_position):
             chess.append("?")
         
         
-    new_list = reshape_list(chess, 6, 7)
-    # print(new_list)
-    for single_list in  new_list:
-        print(single_list)
+    new_list = reshape_list(chess, 6, 7)    
+
+    return new_list
 
 def main():
     image_path = "calibrate_image/calibrate.jpg"
@@ -77,7 +76,10 @@ def main():
     print(chess_position)
 
     chess_img = "test_image/test_01.jpg"
-    read_chess(chess_img, chess_position)
+    chessboard = read_chess(chess_img, chess_position)
+
+    for single_list in chessboard:
+        print(single_list)
 
 if __name__ == "__main__":
     main()
