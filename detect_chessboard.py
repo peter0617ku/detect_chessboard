@@ -24,7 +24,7 @@ def find_position(image_path):
     contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     chess_position = []
-
+    
     # 計算每個輪廓的質心
     for contour in contours:
         M = cv2.moments(contour)
