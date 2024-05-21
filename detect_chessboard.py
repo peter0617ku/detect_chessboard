@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-img = cv2.imread("c:\\Users\\User\\Pictures\\Samsung Flow\\20240521_215954.jpg")
+img = cv2.imread("20240521_215954.jpg")
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # 定義紅色範圍 (這裡的數值需要根據你的圖片調整)
