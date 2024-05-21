@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def find_position(image_path):
-
-    img = cv2.imread("calibrate_image/20240521_215954.jpg")
+    # 讀取圖像
+    img = cv2.imread(image_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     # 定義紅色範圍 (這裡的數值需要根據你的圖片調整)
@@ -26,20 +26,19 @@ def find_position(image_path):
         if M["m00"] != 0:
             cx = int(M["m10"] / M["m00"])
             cy = int(M["m01"] / M["m00"])
-            # print(f"Contour center: ({cx}, {cy})")
-            chess_position.append([cx,cy])
+            chess_position.append([cx, cy])
 
     # 先按照 x 的值進行排序
     chess_position.sort(key=lambda pair: pair[0])
 
     # 再按照 y 的值進行排序
-    chess_position.sort(key=lambda pair: pair[1])    
+    chess_position.sort(key=lambda pair: pair[1])
 
+    # 顯示找到的遮罩
     plt.imshow(mask)
     plt.show()
 
     return chess_position
-
 
 def main():
     image_path = "calibrate_image/20240521_215954.jpg"
