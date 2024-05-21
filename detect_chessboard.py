@@ -40,11 +40,23 @@ def find_position(image_path):
 
     return chess_position
 
+def read_chess(chess_img, chess_position):
+    img = cv2.imread(chess_img)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    for pos in chess_position:
+        x, y = pos
+        r, g, b = img[y, x]  # 注意，這裡的索引是 BGR，而不是 RGB
+        print(f"位置 ({x}, {y}) 的 RGB 值：R={r}, G={g}, B={b}")
+
 def main():
-    image_path = "calibrate_image/20240521_215954.jpg"
+    image_path = "calibrate_image/calibrate.jpg"
     chess_position = find_position(image_path)
 
     print(chess_position)
+
+    chess_img = "test_image/test_01.jpg"
+    read_chess(chess_img, chess_position)
 
 if __name__ == "__main__":
     main()
