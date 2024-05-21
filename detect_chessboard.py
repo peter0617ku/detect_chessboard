@@ -2,6 +2,11 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
+def reshape_list(lst, rows, cols):
+    if rows * cols != len(lst):
+        raise ValueError("無法將列表轉換為指定的行和列數。")
+    return [lst[i:i + cols] for i in range(0, len(lst), cols)]
+
 def find_position(image_path):
     # 讀取圖像
     img = cv2.imread(image_path)
@@ -44,10 +49,26 @@ def read_chess(chess_img, chess_position):
     img = cv2.imread(chess_img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
+    chess = []
     for pos in chess_position:
         x, y = pos
         r, g, b = img[y, x]  # 注意，這裡的索引是 BGR，而不是 RGB
-        print(f"位置 ({x}, {y}) 的 RGB 值：R={r}, G={g}, B={b}")
+        # print(f"位置 ({x}, {y}) 的 RGB 值：R={r}, G={g}, B={b}")
+        if r > b and r > 150:
+            # print("red")
+            chess.append("r")
+        elif b > r and b > 150:
+            # print("blue")
+            chess.append("b")
+        else:
+            # print("??")
+            chess.append("?")
+        
+        
+    new_list = reshape_list(chess, 6, 7)
+    # print(new_list)
+    for single_list in  new_list:
+        print(single_list)
 
 def main():
     image_path = "calibrate_image/calibrate.jpg"
