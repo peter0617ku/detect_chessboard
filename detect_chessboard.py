@@ -69,11 +69,24 @@ def read_chess(chess_img, chess_position):
 
     return new_list
 
+def show_position(image_path, chess_position):
+    img = cv2.imread(image_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    for position in chess_position:
+        x, y = position
+        img = cv2.circle(img, (x, y), radius=20, color=(0, 0, 255), thickness=-1)
+
+    plt.imshow(img)
+    plt.show()
+
 def main():
     image_path = "calibrate_image/calibrate.jpg"
     chess_position = find_position(image_path)
 
     print(chess_position)
+
+    show_position(image_path, chess_position)
 
     chess_img = "test_image/test_01.jpg"
     chessboard = read_chess(chess_img, chess_position)
